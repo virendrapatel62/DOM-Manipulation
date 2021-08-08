@@ -9,14 +9,51 @@
 
     <script>
         console.log("this is functions.html");
-        function doubleOfSum(x, y) {
-            let sum = x + y
-            let doubleOfSum = sum * 2
-            return doubleOfSum
+
+        // function sum(x, y) {
+        //     const sum = x + y
+        //     return sum
+        // }
+
+        // const something = sum
+
+        // console.log(sum(10, 20));
+        // console.log(something(10, 200));
+
+        // const sum = function () {
+        //     console.log('test');
+        // }
+
+        // sum()
+
+        // const sum = (x, y) => {
+        //     console.log(x + y);
+        // }
+
+        // sum(10, 10)
+
+        // ()=>returnValue
+
+        // const sum = (x, y) => x + y
+        // console.log(sum(12, 90))
+
+        function higherOrderFuntion() {
+            function any() {
+                console.log("any funtion")
+
+                return () => {
+                    console.log('fun inside any')
+                }
+            }
+
+            return any
         }
 
-        const ans = doubleOfSum(12, 20)
-        console.log(ans);
+        higherOrderFuntion()()()
+
+
+
+
 
     </script>
 </head>
