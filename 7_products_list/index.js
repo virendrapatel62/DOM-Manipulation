@@ -43,22 +43,26 @@ productForm.addEventListener("submit", (event) => {
 
 
 function renderTable() {
-    const productTableBody = document.querySelector('#productTableBody')
+    const list = document.querySelector('#list')
     let productsHtml = ''
     products.forEach(product => {
         const productHtmlText = `
-                <tr>
-                    <td>${product.name}</td>
-                    <td>${product.description}</td>
-                    <td><img src="${product.imageUrl}" /></td>
-                </tr>
-                
+                <DIV class='col'>
+                <div class="card" style="width: 18rem;">
+                    <img src="${product.imageUrl}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.description}</p>
+                        <a href="#" class="btn btn-dark">Add to cart</a>
+                    </div>
+                 </div>
+                </DIV>
                 `
 
         productsHtml += productHtmlText
     })
 
-    productTableBody.innerHTML = productsHtml
+    list.innerHTML = productsHtml
 
 }
 
