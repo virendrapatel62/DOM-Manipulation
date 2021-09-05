@@ -1,11 +1,25 @@
 console.log("Js file")
 
-const products = []
+var cart = []
+var products = [
+
+]
 const addProductButton = document.querySelector('#add-product-button')
 const listProductButton = document.querySelector('#list-product-button')
 const listContainer = document.querySelector('#list-container')
 const formContainer = document.querySelector('#form-container')
 const productForm = document.querySelector('#productForm')
+
+
+window.addEventListener('load', () => {
+
+    products = getProductsFromLocalStorage()
+    cart = getCartFromLocalStorage()
+
+    renderTable()
+    updateCartItemCount()
+
+})
 
 addProductButton.addEventListener('click', () => {
     console.log("show add product div");
@@ -31,16 +45,49 @@ productForm.addEventListener("submit", (event) => {
     const description = document.querySelector("#productDescriptionInput").value
 
     const product = {
-        imageUrl, name, description
+        id: products.length + 1, imageUrl, name, description
     }
 
     products.push(product)
     console.log(products);
 
     productForm.reset()
+    saveProductsToLocalStorage()
     renderTable()
 })
 
+
+function updateCartItemCount() {
+    document.querySelector('#cartCount').innerHTML = cart.length
+    saveCartToLocalStorage()
+}
+function onAddToCartClick(product, card) {
+    cart.push(product.id)
+
+    card.querySelector('#addtocart').classList.add('hidden')
+    card.querySelector('#removeFromCart').classList.remove('hidden')
+    console.log(cart);
+
+    updateCartItemCount()
+}
+
+function onRemoveFromCartClick(product, card) {
+
+    const index = cart.findIndex(item => item == product.id)
+    cart.splice(index, 1)
+
+    card.querySelector('#addtocart').classList.remove('hidden')
+    card.querySelector('#removeFromCart').classList.add('hidden')
+    console.log(cart);
+
+    updateCartItemCount()
+}
+
+function isInCart(productId) {
+    const index = cart.findIndex(item => item === productId)
+
+    return index > -1
+}
 
 function renderTable() {
     const list = document.querySelector('#list')
@@ -57,12 +104,45 @@ function renderTable() {
         card.querySelector(".card-text").innerHTML = product.description
         card.querySelector("img").src = product.imageUrl
 
+        const removeFromCart = card.querySelector('#removeFromCart')
+        const addToCart = card.querySelector('#addtocart')
+
+        addToCart.addEventListener('click', () => onAddToCartClick(product, card))
+
+        removeFromCart
+            .addEventListener('click', () => onRemoveFromCartClick(product, card))
+
+        if (isInCart(product.id)) {
+            card.querySelector('#addtocart').classList.add('hidden')
+            card.querySelector('#removeFromCart').classList.remove('hidden')
+        } else {
+            card.querySelector('#addtocart').classList.remove('hidden')
+            card.querySelector('#removeFromCart').classList.add('hidden')
+        }
+
         list.appendChild(card)
     })
-
-
 
 }
 
 
-renderTable()
+function saveProductsToLocalStorage() {
+    localStorage.setItem("products", JSON.stringify(products))
+}
+
+function saveCartToLocalStorage() {
+    localStorage.setItem("cart", JSON.stringify(cart))
+}
+
+function getProductsFromLocalStorage() {
+    const products = localStorage.getItem('products')
+
+    return products ? JSON.parse(products) : []
+}
+
+function getCartFromLocalStorage() {
+    const cart = localStorage.getItem('cart')
+
+    return cart ? JSON.parse(cart) : []
+}
+
