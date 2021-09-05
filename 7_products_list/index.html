@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <style>
+        #form-container {
+            display: block;
+        }
+
+        img {
+            height: 100px;
+            border-radius: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li id='add-product-button' class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Add Product</a>
+                    </li>
+                    <li id='list-product-button' class="nav-item">
+                        <a class="nav-link" href="#">Show Products</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container-fluid mt-3 row">
+        <div id="form-container" class="mt-4 col-4">
+            <div class="mx-auto border rounded shadow p-3">
+                <h1>Product Form </h1>
+                <hr>
+                <form id='productForm'>
+                    <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id='productNameInput'>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Product Description</label>
+                        <textarea name="description" id="productDescriptionInput" class="form-control"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Product Image URL</label>
+                        <input type="text" class="form-control" id='productImageUrlInput'>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <input type="submit" value="Add Product" class="btn btn-dark">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+        <div id="list-container" class="col">
+            <h1>List of products</h1>
+            <div id='list'>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Description</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productTableBody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script src="index.js"></script>
+
+</html>
